@@ -10,17 +10,18 @@
   var GOLD = "#d4af37";
 
   var CSS = [
-    "#sas-chat-btn{position:fixed;right:22px;bottom:22px;z-index:99990;width:60px;height:60px;border-radius:50%;",
-    "background:linear-gradient(135deg,#f4ce58,#d4af37);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;",
+    "#sas-chat-btn{position:fixed;right:22px;bottom:22px;z-index:99990;width:64px;height:64px;border-radius:50%;",
+    "background:#0d1622;border:2px solid " + GOLD + ";cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden;",
     "box-shadow:0 10px 30px rgba(212,175,55,.35);transition:transform .18s ease}",
     "#sas-chat-btn:hover{transform:scale(1.07)}",
-    "#sas-chat-btn svg{width:28px;height:28px;fill:#0a0f16}",
+    "#sas-chat-btn img{width:100%;height:100%;object-fit:cover;display:block}",
     "#sas-chat-panel{position:fixed;right:22px;bottom:94px;z-index:99990;width:360px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 140px);",
     "background:#0d1622;border:1px solid rgba(255,255,255,.12);border-radius:18px;display:none;flex-direction:column;overflow:hidden;",
     "box-shadow:0 30px 90px rgba(0,0,0,.55);font-family:Manrope,'Source Sans 3',system-ui,sans-serif}",
     "#sas-chat-panel.open{display:flex}",
     "#sas-chat-head{background:linear-gradient(135deg,#121f2e,#0d1622);padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.08)}",
     "#sas-chat-dot{width:10px;height:10px;border-radius:50%;background:#3ddc84;box-shadow:0 0 8px #3ddc84}",
+    "#sas-chat-ava{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid " + GOLD + "}",
     "#sas-chat-title{color:#f7f9fd;font-weight:700;font-size:15px}",
     "#sas-chat-sub{color:#aab9ca;font-size:12px}",
     "#sas-chat-close{margin-left:auto;background:none;border:none;color:#aab9ca;font-size:20px;cursor:pointer;line-height:1}",
@@ -65,14 +66,13 @@
     style.textContent = CSS;
     document.head.appendChild(style);
 
-    var btn = el("button", null,
-      '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17-.07.54-.5 2.86-1.64 3.9-.18.17-.14.46.08.55.5.21 2.6.35 3.7-.72.6-.14 1.2-.35 1.72-.6A10.2 10.2 0 0 0 12 21.4c5.52 0 10-4.13 10-9.7S17.52 2 12 2zm-1.2 12.5-2.1-2.1 1-1 1.1 1.1 3.4-3.4 1 1-4.4 4.4z"/></svg>');
+    var btn = el("button", null, '<img src="chat-avatar.png" alt="Chat with us"/>');
     btn.id = "sas-chat-btn";
     btn.setAttribute("aria-label", "Chat with us");
 
     var panel = el("div"); panel.id = "sas-chat-panel";
     panel.innerHTML =
-      '<div id="sas-chat-head"><div id="sas-chat-dot"></div>' +
+      '<div id="sas-chat-head"><img id="sas-chat-ava" src="chat-avatar.png" alt=""/><div id="sas-chat-dot"></div>' +
       '<div><div id="sas-chat-title">Social Ad Solutions</div>' +
       '<div id="sas-chat-sub">AI assistant — typically replies instantly</div></div>' +
       '<button id="sas-chat-close" aria-label="Close chat">&times;</button></div>' +
