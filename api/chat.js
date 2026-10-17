@@ -1,7 +1,9 @@
 // Vercel Serverless Function: POST /api/chat  (Google Gemini backend)
 // Env vars (Vercel dashboard -> Settings -> Environment Variables):
 //   GEMINI_API_KEY  (required, free from https://aistudio.google.com) — never exposed to the browser
-//   GEMINI_MODEL    (optional) — defaults to gemini-3.8-flash (free tier)
+//   GEMINI_MODEL    (optional) — defaults to gemini-3.5-flash-lite (free tier, fast).
+//   (gemini-3.8-flash was tried first but kept returning 503 high-demand; the Lite
+//   model responds instantly.)
 
 const SYSTEM_PROMPT = [
   "You are the friendly AI assistant for Social Ad Solutions, a social media",
@@ -63,7 +65,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const model = process.env.GEMINI_MODEL || "gemini-3.8-flash";
+  const model = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
   const url = "https://generativelanguage.googleapis.com/v1beta/models/" +
     encodeURIComponent(model) + ":generateContent";
 
