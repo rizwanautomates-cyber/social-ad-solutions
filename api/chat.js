@@ -81,9 +81,10 @@ module.exports = async (req, res) => {
         contents: contents,
         generationConfig: {
           maxOutputTokens: 800,
-          temperature: 0.7,
-          thinkingConfig: { thinkingBudget: 0 }
+          temperature: 0.7
         }
+        // Note: no thinkingConfig — gemini-3.5-flash-lite is not a thinking
+        // model and rejects thinkingConfig with 400 INVALID_ARGUMENT.
       })
     });
 
