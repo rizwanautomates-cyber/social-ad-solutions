@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://social-ad-solutions.vercel.app/sitemap.xml
