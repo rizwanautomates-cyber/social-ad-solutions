@@ -143,7 +143,7 @@
 
       var ico2 = new THREE.Mesh(
         new THREE.OctahedronGeometry(0.8, 0),
-        new THREE.MeshBasicMaterial({ color: 0xD4AF37, wireframe: true, transparent: true, opacity: 0.3 })
+        new THREE.MeshBasicMaterial({ color: 0x00D4FF, wireframe: true, transparent: true, opacity: 0.35 })
       );
       ico2.position.set(-5.4, -1.6, 0); scene.add(ico2);
 
@@ -207,6 +207,20 @@
       var note = document.getElementById("form-note");
       if (note) note.textContent = "Opening WhatsApp with your enquiry ready to send. You can review it before sending.";
     });
+  }
+
+  /* ---------- cursor glow (desktop only) ---------- */
+  if (!reduced && window.matchMedia("(pointer: fine)").matches) {
+    var glow = document.createElement("div");
+    glow.id = "cursor-glow"; glow.setAttribute("aria-hidden", "true");
+    document.body.appendChild(glow);
+    var gx = window.innerWidth / 2, gy = window.innerHeight / 3, tx = gx, ty = gy;
+    window.addEventListener("mousemove", function (e) { tx = e.clientX; ty = e.clientY; }, { passive: true });
+    (function follow() {
+      gx += (tx - gx) * 0.06; gy += (ty - gy) * 0.06;
+      glow.style.left = gx + "px"; glow.style.top = gy + "px";
+      requestAnimationFrame(follow);
+    })();
   }
 
   /* ---------- footer year ---------- */
