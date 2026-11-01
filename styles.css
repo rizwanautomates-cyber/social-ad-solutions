@@ -195,11 +195,11 @@ main{animation:pageIn .65s cubic-bezier(.2,.7,.2,1) both}
 
 /* ---------- founder ---------- */
 .founder-grid{display:grid;grid-template-columns:1.7fr .85fr;gap:56px;align-items:center}
-.founder-photo{position:relative;order:2;max-width:400px;width:100%;justify-self:end}
-@media(max-width:940px){.founder-grid{grid-template-columns:1fr}.founder-photo{order:0;justify-self:center;max-width:300px}}
-.founder-photo img{border-radius:24px;aspect-ratio:4/5;object-fit:cover;width:100%;border:1px solid transparent;background:linear-gradient(#0A1122,#0A1122) padding-box,linear-gradient(150deg,#176BFF,#00D4FF 55%,#D6B56D) border-box;box-shadow:0 24px 70px rgba(0,90,220,.30),var(--shadow)}
-.founder-photo::after{content:"";position:absolute;inset:14px -14px -14px 14px;border:1px solid var(--line-gold);border-radius:28px;z-index:-1}
-.founder-badge{position:absolute;left:14px;bottom:14px;right:14px;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:16px;background:rgba(8,12,20,.85);border:1px solid var(--line);backdrop-filter:blur(12px)}
+.founder-photo{position:relative;order:2;max-width:250px;width:100%;justify-self:end}
+@media(max-width:940px){.founder-grid{grid-template-columns:1fr}.founder-photo{order:0;justify-self:center;max-width:210px}}
+.founder-photo img{border-radius:50%;aspect-ratio:1/1;object-fit:cover;width:100%;border:2px solid transparent;background:linear-gradient(#0A1122,#0A1122) padding-box,linear-gradient(150deg,#176BFF,#00D4FF 55%,#D6B56D) border-box;box-shadow:0 24px 70px rgba(0,90,220,.30),var(--shadow)}
+.founder-photo::after{display:none}
+.founder-badge{margin-top:16px;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;border-radius:16px;background:rgba(8,12,20,.85);border:1px solid var(--line);backdrop-filter:blur(12px)}
 .founder-badge img{width:46px;height:46px;border-radius:12px}
 .founder-badge b{font-family:var(--font-d);display:block;line-height:1.2}
 .founder-badge span{font-size:13px;color:var(--gold-l)}
@@ -323,13 +323,20 @@ form.lead-form .full{grid-column:1/-1}
 .logo3d-light{position:absolute;inset:0;background:radial-gradient(340px 340px at var(--mx,50%) var(--my,40%),rgba(0,212,255,.13),transparent 70%);pointer-events:none}
 .logo3d-inner{position:relative;z-index:1}
 .logo3d-stage{position:relative;height:440px;max-width:640px;margin:10px auto 0}
-#logo3d-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .8s ease}
+#logo3d-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .8s ease;touch-action:none;cursor:grab}
 .logo3d.live #logo3d-canvas{opacity:1}
 .logo3d-fallback{position:absolute;inset:0;margin:auto;width:min(290px,68%);height:auto;filter:drop-shadow(0 24px 50px rgba(0,110,255,.35));transition:opacity .5s ease}
 .logo3d.live .logo3d-fallback{opacity:0;visibility:hidden}
-.logo3d-brand{text-align:center;margin-top:4px}
+.logo3d-brand{text-align:center;margin-top:4px;transform:perspective(700px) rotateY(calc(var(--ry,0)*5deg)) rotateX(calc(var(--rx,0)*4deg));transition:transform .35s ease-out}
+.logo3d-name.split{background:none;-webkit-background-clip:initial;background-clip:initial;animation:none}
+.logo3d-name .lt{display:inline-block;background:linear-gradient(100deg,#176BFF 5%,#00D4FF 32%,#B8C7DF 50%,#754BFF 68%,#176BFF 95%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(18px) rotateX(50deg)}
+.logo3d.inview .logo3d-name .lt{animation:letterUp .7s cubic-bezier(.2,.8,.2,1) forwards,nameSheen 7s linear infinite;animation-delay:calc(var(--i)*45ms),0s}
+@keyframes letterUp{to{opacity:1;transform:translateY(0) rotateX(0)}}
+.logo3d-tag .wd{display:inline-block;opacity:0;transform:translateY(12px)}
+.logo3d.inview .logo3d-tag .wd{animation:wordUp .55s ease forwards;animation-delay:calc(500ms + var(--i)*70ms)}
+@keyframes wordUp{to{opacity:1;transform:translateY(0)}}
 .logo3d-name{display:block;font-family:var(--font-d);font-weight:700;font-size:clamp(25px,4.6vw,44px);letter-spacing:.14em;background:linear-gradient(100deg,#176BFF 5%,#00D4FF 32%,#B8C7DF 50%,#754BFF 68%,#176BFF 95%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:nameSheen 7s linear infinite;filter:drop-shadow(0 0 18px rgba(0,160,255,.25))}
 @keyframes nameSheen{from{background-position:0% 0}to{background-position:220% 0}}
 .logo3d-tag{display:block;margin-top:10px;color:var(--muted);font-size:clamp(15px,2vw,19px);font-style:italic}
 @media(max-width:640px){.logo3d{padding:80px 0 70px}.logo3d-stage{height:320px}}
-@media (prefers-reduced-motion: reduce){.logo3d-mesh,.logo3d-name{animation:none}}
+@media (prefers-reduced-motion: reduce){.logo3d-mesh,.logo3d-name{animation:none}.logo3d-name .lt,.logo3d-tag .wd{opacity:1;transform:none;animation:none}}
